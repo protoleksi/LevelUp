@@ -43,6 +43,11 @@ Unity 6 (6000.0.6f1) clicker game with coin mechanics, upgrades, and progress ba
 - Added `_progressBarText` for "current / max" display
 - Uses same formatting (K/M/B)
 
+### 8. Sliced Progress Bar Support ✅ FIXED
+- Progress updates use `Image.fillAmount` for `Filled` images
+- For `Sliced` (and other non-filled) images, progress changes the `RectTransform` width
+- The fill starts at the left edge and preserves the sliced sprite borders
+
 ## Current Configuration (Inspector-adjustable)
 - Coins per click: 10
 - Base upgrade cost: 500
@@ -67,9 +72,10 @@ Unity 6 (6000.0.6f1) clicker game with coin mechanics, upgrades, and progress ba
 ## Setup Instructions
 
 ### Progress Bar Setup
-1. `progress` Image: `Image Type = Filled`, `Fill Method = Horizontal`, `Fill Origin = Left`
+1. `progress` Image: use `Image Type = Sliced` to preserve the sprite borders while the bar changes width. `Filled` with `Fill Method = Horizontal` and `Fill Origin = Left` is also supported.
 2. `_barBackground` = drag `BAR` object (parent or sibling RectTransform)
-3. In Awake, progress bar rect auto-stretches to match BAR size
+3. In Awake, progress bar rect auto-stretches to match the bar container
+4. For `Sliced`, use a sprite with its borders configured in the Sprite Editor
 
 ### Upgrade Button Text
 1. Create child TextMeshProUGUI on `ButtunLevelUp` (or use existing)

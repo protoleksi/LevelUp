@@ -30,7 +30,7 @@
 | **Upgrade Cost Text** | `LevelUp/ButtunLevelUp/500/1,5k` | `TextMeshProUGUI` (стоимость улучшения: `500`, `1.5K`...) |
 | **Upgrade Reward Text** | *Создайте новый Text на кнопке* | `TextMeshProUGUI` (показывает +X за улучшение) |
 | **Progress Bar Text** | *Создайте Text на прогресс-баре* | `TextMeshProUGUI` (показывает "текущие / макс": `500 / 1.5K`) |
-| **Progress Bar** | `progress` | `Image` (с `Image Type = Filled`, `Fill Method = Horizontal`) |
+| **Progress Bar** | `progress` | `Image` (рекомендуется `Image Type = Sliced`; также поддерживается `Filled`) |
 | **Bar Background** | `BAR` | `RectTransform` (фон прогресс-бара для масштабирования) |
 | **Upgrade Button** | `LevelUp/ButtunLevelUp` | `Button` |
 
@@ -59,10 +59,9 @@
 
 ### 6. Настройка прогресс-бара
 - Объект `progress` → компонент `Image`
-- `Image Type` = **Filled**
-- `Fill Method` = **Horizontal** (или Vertical, как нужно)
-- `Fill Origin` = **Left** (или Bottom)
-- `Fill Amount` = 0 (изначально пустой)
+- `Image Type` = **Sliced** (границы спрайта сохраняются при изменении ширины)
+- Для варианта **Filled** используйте `Fill Method` = **Horizontal**, `Fill Origin` = **Left**
+- Для `Sliced` настройте границы спрайта в Sprite Editor
 - В инспекторе `ClickerController` поле **Bar Background** = перетащите объект `BAR`
 - В `Awake` прогресс-бар автоматически растягивается на весь размер `BAR`
 
@@ -124,7 +123,7 @@
 | Клик не работает | Проверьте `Raycast Target = true` на Image персонажа; убедитесь, что Canvas имеет `Graphic Raycaster` |
 | Кнопка не нажимается | Проверьте `Interactable = true` у Button; назначьте `OnClick` событие |
 | Текст не обновляется | Проверьте назначение полей в инспекторе `ClickerController` |
-| Прогресс-бар не заполняется | Убедитесь, что `Image Type = Filled` и правильный `Fill Method`; назначьте `Bar Background` |
+| Прогресс-бар не заполняется | Убедитесь, что назначены `Progress Bar` и `Bar Background`; для `Filled` проверьте `Fill Method`, а для `Sliced` — границы спрайта в Sprite Editor |
 | Ошибки компиляции | Убедитесь, что подключены `UnityEngine.UI` и `TMPro` (using) |
 | Монеты превышают макс. значение | Включите `Cap Coins At Max Value` для жёсткого ограничения |
 | Числа вылезают за границы текста | Форматирование K/M/B включено автоматически в `FormatNumber()` |
