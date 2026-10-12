@@ -109,10 +109,12 @@ public class ClickerController : MonoBehaviour
 
     private void AddCoins(long amount)
     {
+        long previousCoins = _coins;
         long newCoins = _coins + amount;
         if (_capCoinsAtMaxValue)
             newCoins = (long)Mathf.Min(newCoins, _progressBarMaxValue);
         _coins = newCoins;
+        TryShowInterstitialAd(previousCoins, _coins);
         UpdateUI();
         UpdateUpgradeButtonState();
     }
@@ -190,6 +192,20 @@ public class ClickerController : MonoBehaviour
         if (number >= 1000)
             return $"{number / 1000f:F1}K";
         return number.ToString();
+    }
+
+    private void TryShowInterstitialAd(long previousCoins, long currentCoins)
+    {
+        if (previousCoins >= currentCoins)
+            return;
+
+        long halfProgressThreshold = Mathf.CeilToInt(_progressBarMaxValue * 0.5f);
+        if (previousCoins < halfProgressThreshold && currentCoins >= halfProgressThreshold)
+        {
+#if !UNITY_EDITOR && InterstitialAdv_yg && YandexGamesPlatform_yg
+            YG.Insides.YGInsides.OpenInterAdv();
+#endif
+        }
     }
 
     private void SaveGame()
