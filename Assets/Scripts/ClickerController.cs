@@ -33,6 +33,7 @@ public class ClickerController : MonoBehaviour
     [SerializeField] private bool _resetOnStart = false;
     private float _autoSaveTimer = 0f;
     private const float AUTO_SAVE_INTERVAL = 5f;
+    private float _progressBarFullWidth;
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class ClickerController : MonoBehaviour
             progressRect.offsetMin = Vector2.zero;
             progressRect.offsetMax = Vector2.zero;
             progressRect.pivot = new Vector2(0f, 0.5f);
+            _progressBarFullWidth = progressRect.rect.width;
         }
         
         if (_upgradeButton == null)
@@ -152,7 +154,19 @@ public class ClickerController : MonoBehaviour
         if (_progressBar != null && _barBackground != null)
         {
             float progress = Mathf.Clamp01(_coins / _progressBarMaxValue);
-            _progressBar.fillAmount = progress;
+
+            if (_progressBar.type == Image.Type.Filled)
+            {
+                _progressBar.fillAmount = progress;
+            }
+            else
+            {
+                RectTransform progressRect = _progressBar.rectTransform;
+                progressRect.offsetMin = Vector2.zero;
+                progressRect.offsetMax = new Vector2(
+                    -_progressBarFullWidth * (1f - progress),
+                    0f);
+            }
         }
     }
 
