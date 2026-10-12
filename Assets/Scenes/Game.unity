@@ -267,6 +267,7 @@ GameObject:
   - component: {fileID: 134574387}
   - component: {fileID: 134574389}
   - component: {fileID: 134574388}
+  - component: {fileID: 134574390}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -331,6 +332,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 134574386}
   m_CullTransparentMesh: 1
+--- !u!114 &134574390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134574386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ad9788455bbe534cb70d7b94643475c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterClickHandler
+  _clickerController: {fileID: 1400996791}
 --- !u!1 &145647301
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,8 +813,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 35.78, y: 0.00000071526}
-  m_SizeDelta: {x: 72, y: 14}
+  m_AnchoredPosition: {x: 16.5479, y: 0.00000071526}
+  m_SizeDelta: {x: 110.4643, y: 14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &369335114
 MonoBehaviour:
@@ -1172,11 +1186,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: a6c8d3ce6b8fa7f4ea3866a46a40d2be, type: 3}
-  m_Type: 1
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1383,7 +1397,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 558268432}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1400996791}
+        m_TargetAssemblyTypeName: ClickerController, Assembly-CSharp
+        m_MethodName: TryUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &558268432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2876,6 +2902,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317382930}
   m_CullTransparentMesh: 1
+--- !u!1 &1400996789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1400996792}
+  - component: {fileID: 1400996791}
+  - component: {fileID: 1400996790}
+  m_Layer: 0
+  m_Name: ClickerController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1400996790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400996789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718907774605a8c43960d3c482e3dcab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AutoCoinGenerator
+  _clickerController: {fileID: 1400996791}
+  _tickInterval: 1
+--- !u!114 &1400996791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400996789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90630b20c3614c745933685841a4fa09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ClickerController
+  _coins: 0
+  _coinsPerClick: 10
+  _coinsPerSecond: 1
+  _baseUpgradeCost: 100
+  _upgradeCostMultiplier: 1.15
+  _upgradeCoinsPerSecondIncrease: 1
+  _coinsPerSecondText: {fileID: 1807820754}
+  _upgradeCostText: {fileID: 1475785169}
+  _upgradeRewardText: {fileID: 1125153334}
+  _progressBarText: {fileID: 369335114}
+  _progressBar: {fileID: 494003697}
+  _barBackground: {fileID: 1317382931}
+  _upgradeButton: {fileID: 558268431}
+  _progressBarMaxValue: 1500
+  _capCoinsAtMaxValue: 1
+  _enableAutoSave: 0
+  _resetOnStart: 1
+--- !u!4 &1400996792
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400996789}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 207, y: 368, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1412872375
 GameObject:
   m_ObjectHideFlags: 0
@@ -3697,3 +3799,4 @@ SceneRoots:
   - {fileID: 2840002}
   - {fileID: 811247811}
   - {fileID: 1167096947}
+  - {fileID: 1400996792}
