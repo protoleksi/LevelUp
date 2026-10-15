@@ -142,7 +142,7 @@ public class ClickerController : MonoBehaviour
     private void UpdateUI()
     {
         if (_coinsPerSecondText != null)
-            _coinsPerSecondText.text = FormatNumber((long)_coinsPerSecond) + "/s";
+            _coinsPerSecondText.text = FormatNumber((long)_coinsPerSecond);
 
         if (_upgradeCostText != null)
             _upgradeCostText.text = FormatNumber((long)_currentUpgradeCost);
